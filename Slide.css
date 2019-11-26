@@ -1,0 +1,9 @@
+.slide {
+  height: 100vh;
+  position: absolute;
+  transform: translate(100%);
+  width: 100vw;
+}
+.slide[aria-current="step"] {
+  transform: translate(0);
+}
