@@ -19,8 +19,10 @@ Instead of making this an npm package that requires a configuration api, simply 
 
 ```sh
 # first
+mkdir your-presentation
+# then
 npx degit filoxo/minideck
-#then
+# and lastly
 yarn install
 ```
 
