@@ -2,10 +2,10 @@ import React from "react";
 import { render } from "react-dom";
 import { MDXProvider } from "@mdx-js/react";
 
-import Deck from "./Deck";
-import Slide from "./Slide";
-import Appear from "./Appear";
-import Code from "./Code";
+import Deck from "./components/Deck";
+import Slide from "./components/Slide";
+import Appear from "./components/Appear";
+import Code from "./components/Code";
 
 import MDXContent from "./content.mdx";
 
