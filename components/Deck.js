@@ -1,6 +1,5 @@
-import React, { useState, useCallback, useMemo, useReducer } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 
-import { DeckContext } from "../contexts";
 import useEvent from "./useEvent";
 import Slide from "./Slide";
 import styles from "./Deck.css";
@@ -49,17 +48,11 @@ export default function Deck({ children, ...props }) {
 
   return (
     <div className={styles.deck}>
-      <DeckContext.Provider
-        value={{
-          currentSlideIndex: currentIndex
-        }}
-      >
-        {slides.map((slideNodes, i) => (
-          <Slide index={i} key={`slide-${i}`}>
-            {slideNodes}
-          </Slide>
-        ))}
-      </DeckContext.Provider>
+      {slides.map((slideNodes, i) => (
+        <Slide isActive={i === currentIndex} key={`slide-${i}`}>
+          {slideNodes}
+        </Slide>
+      ))}
     </div>
   );
 }

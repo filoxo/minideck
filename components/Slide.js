@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import styles from "./Slide.css";
-import { useDeckContext } from "../contexts";
 import useAppearSequence from "./useAppearSequence";
 
 export default function Slide({ children, index, ...props }) {
