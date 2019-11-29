@@ -1,9 +1,14 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "./Slide.css";
 import { useDeckContext } from "../contexts";
 
+const flipAppearanceUntilFinding = bool => node => {
+  const { appear } = node.dataset;
+  node.dataset.appear = bool;
+  bool = appear === "true";
+};
+
 const useAppearNodes = (slideRef, isCurrentStep) => {
-  const [currentAppearStep, setCurrentAppearStep] = useState(-1);
   const appearNodes = useRef();
 
   useEffect(() => {
@@ -18,16 +23,13 @@ const useAppearNodes = (slideRef, isCurrentStep) => {
           if (isCurrentStep) {
             switch (e.key) {
               case "ArrowUp": {
-                const prevAppearStep = Math.max(-1, currentAppearStep - 1);
-                setCurrentAppearStep(prevAppearStep);
+                [...appearNodes.current]
+                  .reverse()
+                  .forEach(flipAppearanceUntilFinding(false));
                 break;
               }
               case "ArrowDown": {
-                const nextAppearIndex = Math.min(
-                  appearNodes.current.length,
-                  currentAppearStep + 1
-                );
-                setCurrentAppearStep(nextAppearIndex);
+                appearNodes.current.forEach(flipAppearanceUntilFinding(true));
                 break;
               }
               default:
@@ -41,13 +43,7 @@ const useAppearNodes = (slideRef, isCurrentStep) => {
     return () => {
       window.removeEventListener("keydown", handleAppearSequence);
     };
-  }, [isCurrentStep, currentAppearStep]);
-
-  useEffect(() => {
-    appearNodes.current.forEach((node, index) => {
-      node.dataset.appear = `${index <= currentAppearStep}`;
-    });
-  }, [currentAppearStep]);
+  }, [isCurrentStep]);
 };
 
 export default function Slide({ children, index, ...props }) {
