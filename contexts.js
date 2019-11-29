@@ -12,7 +12,7 @@ export const SlideContext = createContext(null);
 export const useSlideContext = () => useContext(SlideContext);
 
 export const DeckContext = createContext({
-  currentSlide: 0
+  currentSlideIndex: 0
 });
 
 export const useDeckContext = () => useContext(DeckContext);
