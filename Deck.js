@@ -1,4 +1,6 @@
 import React, { useState, useCallback, useMemo, useReducer } from "react";
+
+import { DeckContext } from "./contexts";
 import useEvent from "./useEvent";
 import Slide from "./Slide";
 import styles from "./Deck.css";
@@ -100,11 +102,17 @@ export default function Deck({ children, ...props }) {
 
   return (
     <div className={styles.deck}>
-      {React.Children.map(slides, (slideNodes, i) => (
-        <Slide index={i} aria-current={i === currentIndex ? "step" : null}>
-          {slideNodes}
-        </Slide>
-      ))}
+      <DeckContext.Provider
+        value={{
+          currentSlideIndex: currentIndex
+        }}
+      >
+        {slides.map((slideNodes, i) => (
+          <Slide index={i} key={`slide-${i}`}>
+            {slideNodes}
+          </Slide>
+        ))}
+      </DeckContext.Provider>
     </div>
   );
 }
