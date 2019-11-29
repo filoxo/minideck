@@ -28,8 +28,9 @@ yarn install
 
 ## Extensibility
 
-Again, rather than requiring configuraiton, you have access to all of the underlying components and tooling. Need to change something? Just find the file and tweak it.
+Again, rather than requiring configuration, you have access to all of the underlying components and tooling. Need to change something? Just find the file and tweak it.
 
+- Add your own presentation content in `content.mdx` 
 - Change the styling? Modify the style tags in `index.html` or the corresponding component .css file
 - Change the code theme? Change the imported theme in `Code.js`
 - Add more components? Import them in `content.mdx`, or add them to the `components` list in `index.js`
