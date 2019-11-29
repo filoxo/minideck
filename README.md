@@ -1,6 +1,6 @@
 # minideck
 
-An MDX-enabled simple deck.
+A simple MDX-powered deck.
 
 ## How it works
 
