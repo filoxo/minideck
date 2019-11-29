@@ -1,5 +1,7 @@
 import { useRef, useEffect } from "react";
 
+const noop = () => {};
+
 const flipAppearanceUntilFinding = bool => node => {
   const { appear } = node.dataset;
   node.dataset.appear = bool;
@@ -35,7 +37,7 @@ const useAppearSequence = (slideRef, isCurrentStep) => {
             }
           }
         }
-      : () => {};
+      : noop;
 
     window.addEventListener("keydown", handleAppearSequence);
     return () => {
