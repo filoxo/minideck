@@ -6,6 +6,7 @@ import Deck from "./components/Deck";
 import Slide from "./components/Slide";
 import Appear from "./components/Appear";
 import Code from "./components/Code";
+import Table from "./components/Table";
 
 import MDXContent from "./content.mdx";
 
@@ -15,7 +16,8 @@ render(
       wrapper: Deck,
       Slide,
       Appear,
-      code: Code
+      code: Code,
+      table: Table
     }}
   >
     <MDXContent />
