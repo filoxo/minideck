@@ -22,6 +22,8 @@
     "postcss-modules": "^2.0.0",
     "prism-react-renderer": "^1.0.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-easy-params": "^2.0.2",
+    "react-easy-state": "^6.1.3"
   }
 }
