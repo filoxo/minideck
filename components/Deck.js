@@ -24,8 +24,9 @@ const setIndexPath = (max) => {
   } else if (max < indexInt) {
     path[0] = max;
   } else {
-    path[0] = indexInt.toString();
+    path[0] = indexInt;
   }
+  slides.index = path[0];
 };
 
 const Deck = view(({ children }) => {
