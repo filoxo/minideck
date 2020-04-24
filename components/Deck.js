@@ -1,58 +1,66 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
+import { store, view } from "react-easy-state";
+import { path } from "react-easy-params";
 
 import useEvent from "./useEvent";
 import Slide from "./Slide";
 import styles from "./Deck.css";
 
-export default function Deck({ children, ...props }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const slides = store({
+  index: 0,
+  list: [[]],
+  next: () =>
+    (slides.index = path[0] = Math.min(
+      slides.index + 1,
+      slides.list.length - 1
+    )),
+  prev: () => (slides.index = path[0] = Math.max(slides.index - 1, 0)),
+});
 
-  const slides = useMemo(() => {
-    const { slides } = React.Children.toArray(children).reduce(
-      (slideAccumulator, currentNode) => {
-        if (currentNode.props.mdxType === "hr") {
-          slideAccumulator.slideIndex += 1;
-          slideAccumulator.slides[slideAccumulator.slideIndex] = [];
-        } else {
-          slideAccumulator.slides[slideAccumulator.slideIndex].push(
-            currentNode
-          );
-        }
-        return slideAccumulator;
-      },
-      {
-        slides: [[]],
-        slideIndex: 0
+const setIndexPath = (max) => {
+  const indexInt = parseInt(path[0], 10);
+  if (Number.isNaN(indexInt) || indexInt < 0) {
+    path[0] = 0;
+  } else if (max < indexInt) {
+    path[0] = max;
+  } else {
+    path[0] = indexInt.toString();
+  }
+};
+
+const Deck = view(({ children }) => {
+  useMemo(() => {
+    React.Children.toArray(children).forEach((currentNode) => {
+      if (currentNode.props.mdxType === "hr") {
+        slides.list.push([]);
+      } else {
+        slides.list[slides.list.length - 1].push(currentNode);
       }
-    );
-    return slides;
+    });
+
+    setIndexPath(slides.list.length - 1);
   }, [children]);
 
-  const handleNavigation = useCallback(
-    e => {
-      switch (e.key) {
-        case "ArrowRight":
-          const nextOrMax = Math.min(currentIndex + 1, slides.length - 1);
-          setCurrentIndex(nextOrMax);
-          break;
-        case "ArrowLeft":
-          const prevOrMin = Math.max(currentIndex - 1, 0);
-          setCurrentIndex(prevOrMin);
-          break;
-      }
-    },
-    [currentIndex, setCurrentIndex, slides]
-  );
-
-  useEvent("keydown", handleNavigation);
+  useEvent("keydown", (e) => {
+    switch (e.key) {
+      case "ArrowRight":
+        slides.next();
+        break;
+      case "ArrowLeft":
+        slides.prev();
+        break;
+    }
+  });
 
   return (
     <div className={styles.deck}>
-      {slides.map((slideNodes, i) => (
-        <Slide isActive={i === currentIndex} key={`slide-${i}`}>
+      {slides.list.map((slideNodes, i) => (
+        <Slide isActive={i === slides.index} key={`slide-${i}`}>
           {slideNodes}
         </Slide>
       ))}
     </div>
   );
-}
+});
+
+export default Deck;
