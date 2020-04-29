@@ -42,15 +42,9 @@ const Deck = view(({ children }) => {
     setIndexPath(slides.list.length - 1);
   }, [children]);
 
-  useEvent("keydown", (e) => {
-    switch (e.key) {
-      case "ArrowRight":
-        slides.next();
-        break;
-      case "ArrowLeft":
-        slides.prev();
-        break;
-    }
+  useEvent("keydown", ({ key }) => {
+    if (key === "ArrowRight") slides.next();
+    if (key === "ArrowLeft") slides.prev();
   });
 
   return (
