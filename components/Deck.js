@@ -4,7 +4,6 @@ import { path } from "react-easy-params";
 
 import useEvent from "./useEvent";
 import Slide from "./Slide";
-import styles from "./Deck.css";
 
 const slides = store({
   index: 0,
@@ -48,7 +47,7 @@ const Deck = view(({ children }) => {
   });
 
   return (
-    <div className={styles.deck}>
+    <div className="w-screen h-screen overflow-hidden relative">
       {slides.list.map((slideNodes, i) => (
         <Slide isActive={i === slides.index} key={`slide-${i}`}>
           {slideNodes}
