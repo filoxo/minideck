@@ -32,7 +32,7 @@ yarn start
 
 Again, rather than requiring configuration, you have access to all of the underlying components and tooling. Need to change something? Just find the file and tweak it.
 
-- Add your own presentation content in `content.mdx` 
+- Add your own presentation content in `content.mdx`
 - Change the styling? Modify the style tags in `index.html` or the corresponding component .css file
 - Change the code theme? Change the imported theme in `Code.js`
 - Add more components? Import them in `content.mdx`, or add them to the `components` list in `index.js`
@@ -42,11 +42,11 @@ Again, rather than requiring configuration, you have access to all of the underl
 
 ### Deck
 
-`Deck` does two things:
+`Deck` does three things:
 
 - Iterates through the MDX document and groups elements between `---`s and puts them into `Slide`s
 - Tracks that current state of the active slide
-  - TODO: sync to URL
+- Syncs current slide index to URL
 
 ### Slide
 
