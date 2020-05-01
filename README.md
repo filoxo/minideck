@@ -49,7 +49,7 @@ Again, rather than requiring configuration, you have access to all of the underl
 
     `_Warning!_{.text-red-500}`
 
-  - or in your MDX components
+  - or in your MDX components, optionally with [classnames](https://github.com/JedWatson/classnames#readme) for conditional logic
 
 - Change the code theme? Change the imported theme in `Code.js`
 - Add more components? Import them in `content.mdx`, or add them to the `components` list in `index.js`
