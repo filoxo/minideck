@@ -9,11 +9,11 @@ const slides = store({
   index: 0,
   list: [[]],
   next: () =>
-    (slides.index = path[0] = Math.min(
+    (path[0] = slides.index = Math.min(
       slides.index + 1,
       slides.list.length - 1
     )),
-  prev: () => (slides.index = path[0] = Math.max(slides.index - 1, 0)),
+  prev: () => (path[0] = slides.index = Math.max(slides.index - 1, 0)),
 });
 
 const setIndexPath = (max) => {
