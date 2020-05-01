@@ -2,9 +2,11 @@ import { useRef, useEffect } from "react";
 
 const noop = () => {};
 
-const flipAppearanceUntilFinding = bool => node => {
+const flipAppearanceUntilFinding = (bool) => (node) => {
   const { appear } = node.dataset;
   node.dataset.appear = bool;
+  node.classList.toggle("visible", bool);
+  node.classList.toggle("invisible", !bool);
   bool = appear === "true";
 };
 
@@ -19,7 +21,7 @@ const useAppearSequence = (slideRef, isCurrentStep) => {
 
   useEffect(() => {
     const handleAppearSequence = isCurrentStep
-      ? e => {
+      ? (e) => {
           if (isCurrentStep) {
             switch (e.key) {
               case "ArrowUp": {
