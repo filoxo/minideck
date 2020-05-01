@@ -27,6 +27,17 @@ yarn install
 yarn start
 ```
 
+### Prod build
+
+Generate a production-ready version of your slide deck. This is ideal for deploying your slides as static assets and making them publicly available.
+
+```sh
+# build
+yarn build
+# serve prod locally; recommended for better perf when presenting
+npx serve -d dist
+```
+
 ## Extensibility
 
 Again, rather than requiring configuration, you have access to all of the underlying components and tooling. Need to change something? Just find the file and tweak it.
