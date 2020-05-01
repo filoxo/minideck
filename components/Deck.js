@@ -1,60 +1,84 @@
-import React, { useMemo } from "react";
-import { store, view } from "react-easy-state";
-import { path } from "react-easy-params";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 
 import useEvent from "./useEvent";
 import Slide from "./Slide";
 
-const slides = store({
-  index: 0,
-  list: [[]],
-  next: () =>
-    (path[0] = slides.index = Math.min(
-      slides.index + 1,
-      slides.list.length - 1
-    )),
-  prev: () => (path[0] = slides.index = Math.max(slides.index - 1, 0)),
-});
-
-const setIndexPath = (max) => {
-  const indexInt = parseInt(path[0], 10);
-  if (Number.isNaN(indexInt) || indexInt < 0) {
-    path[0] = 0;
-  } else if (max < indexInt) {
-    path[0] = max;
-  } else {
-    path[0] = indexInt;
-  }
-  slides.index = path[0];
-};
-
-const Deck = view(({ children }) => {
-  useMemo(() => {
-    React.Children.toArray(children).forEach((currentNode) => {
-      if (currentNode.props.mdxType === "hr") {
-        slides.list.push([]);
-      } else {
-        slides.list[slides.list.length - 1].push(currentNode);
+export default function Deck({ children }) {
+  const slides = useMemo(() => {
+    const { slides } = React.Children.toArray(children).reduce(
+      (slideAccumulator, currentNode) => {
+        if (currentNode.props.mdxType === "hr") {
+          slideAccumulator.slideIndex += 1;
+          slideAccumulator.slides[slideAccumulator.slideIndex] = [];
+        } else {
+          slideAccumulator.slides[slideAccumulator.slideIndex].push(
+            currentNode
+          );
+        }
+        return slideAccumulator;
+      },
+      {
+        slides: [[]],
+        slideIndex: 0,
       }
-    });
-
-    setIndexPath(slides.list.length - 1);
+    );
+    return slides;
   }, [children]);
 
-  useEvent("keydown", ({ key }) => {
-    if (key === "ArrowRight") slides.next();
-    if (key === "ArrowLeft") slides.prev();
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    const [indexPath] = window.location.pathname
+      .split("/")
+      .filter((s) => s !== "");
+
+    const initialIndex = parseInt(indexPath, 10);
+
+    if (Number.isNaN(initialIndex) || initialIndex < 0) {
+      return 0;
+    } else if (slides.length < initialIndex) {
+      return slides.length;
+    } else {
+      return initialIndex;
+    }
   });
+
+  const updateIndexWithUrl = (index) => {
+    setCurrentIndex(index);
+    history.pushState({ currentIndex: index }, null, "/" + index);
+  };
+
+  const handleNavigation = useCallback(
+    (e) => {
+      if (e.key === "ArrowRight") {
+        const nextOrMax = Math.min(currentIndex + 1, slides.length - 1);
+        updateIndexWithUrl(nextOrMax);
+      }
+      if (e.key === "ArrowLeft") {
+        const prevOrMin = Math.max(currentIndex - 1, 0);
+        updateIndexWithUrl(prevOrMin);
+      }
+    },
+    [currentIndex, slides]
+  );
+
+  useEffect(() => {
+    function syncToUrlBack(e) {
+      setCurrentIndex(e.state.currentIndex);
+    }
+    window.addEventListener("popstate", syncToUrlBack);
+    return () => {
+      window.removeEventListener("popstate", syncToUrlBack);
+    };
+  }, []);
+
+  useEvent("keydown", handleNavigation);
 
   return (
     <div className="w-screen h-screen overflow-hidden relative">
-      {slides.list.map((slideNodes, i) => (
-        <Slide isActive={i === slides.index} key={`slide-${i}`}>
+      {slides.map((slideNodes, i) => (
+        <Slide isActive={i === currentIndex} key={`slide-${i}`}>
           {slideNodes}
         </Slide>
       ))}
     </div>
   );
-});
-
-export default Deck;
+}
