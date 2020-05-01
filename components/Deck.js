@@ -3,6 +3,10 @@ import React, { useState, useCallback, useMemo, useEffect } from "react";
 import useEvent from "./useEvent";
 import Slide from "./Slide";
 
+const pushState = (currentIndex) => {
+  history.pushState({ currentIndex }, null, "/" + currentIndex);
+};
+
 export default function Deck({ children }) {
   const slides = useMemo(() => {
     const { slides } = React.Children.toArray(children).reduce(
@@ -31,11 +35,14 @@ export default function Deck({ children }) {
       .filter((s) => s !== "");
 
     const initialIndex = parseInt(indexPath, 10);
+    const max = slides.length - 1;
 
     if (Number.isNaN(initialIndex) || initialIndex < 0) {
+      pushState(0);
       return 0;
-    } else if (slides.length < initialIndex) {
-      return slides.length;
+    } else if (max < initialIndex) {
+      pushState(max);
+      return max;
     } else {
       return initialIndex;
     }
@@ -43,7 +50,7 @@ export default function Deck({ children }) {
 
   const updateIndexWithUrl = (index) => {
     setCurrentIndex(index);
-    history.pushState({ currentIndex: index }, null, "/" + index);
+    pushState(index);
   };
 
   const handleNavigation = useCallback(
