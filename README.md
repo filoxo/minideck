@@ -9,8 +9,7 @@ This project uses:
 - [Parcel](https://parceljs.org/) for transpiling, serving, and building files
 - [MDX](https://mdxjs.com/) for authoring using Markdown syntax
 - [React](https://reactjs.org/) custom components
-- CSS modules configured through [PostCSS](https://postcss.org/)
-- [Purecss](https://purecss.io/) for basic semantic, table, and grid styles
+- [Tailwind CSS](https://tailwindcss.com/) & [remark-attr](https://github.com/arobase-che/remark-attr#readme) for styling
 - [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer) for styling code blocks
 
 ## Usage
@@ -33,7 +32,14 @@ yarn start
 Again, rather than requiring configuration, you have access to all of the underlying components and tooling. Need to change something? Just find the file and tweak it.
 
 - Add your own presentation content in `content.mdx`
-- Change the styling? Modify the style tags in `index.html` or the corresponding component .css file
+- Change the styling? Add [Tailwind classes](https://nerdcave.com/tailwind-cheat-sheet) by either:
+
+  - using inline attribute syntax (learn more at the [remark-attr repo](https://github.com/arobase-che/remark-attr#readme))
+
+    `_Warning!_{.text-red-500}`
+
+  - or in your MDX components
+
 - Change the code theme? Change the imported theme in `Code.js`
 - Add more components? Import them in `content.mdx`, or add them to the `components` list in `index.js`
 - Add more features? Feel free to send a PR that you think would help everyone!
