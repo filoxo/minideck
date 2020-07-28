@@ -18,12 +18,10 @@ Instead of making this an npm package that requires a configuration api, simply 
 
 ```sh
 # first
-mkdir your-presentation && cd your-presentation
+npx degit filoxo/minideck your-presentation-name
 # then
-npx degit filoxo/minideck
-# and
 yarn install
-# finally
+# and finally
 yarn start
 ```
 
