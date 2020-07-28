@@ -79,3 +79,7 @@ Again, rather than requiring configuration, you have access to all of the underl
 ### Appear
 
 - Wraps the rendered element in hidden styling
+
+### Aside
+
+Many times, the Markdown `blockquote` ie. `>` is abused when in reality an `aside` element is more appropriate. This component should be used in those instances, which is almost always.
