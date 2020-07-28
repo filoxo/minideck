@@ -30,7 +30,7 @@ render(
       ul: Base("ul", "list-disc list-inside"),
       table: Base("table", "table-auto mx-auto"),
       td: Base("td", "px-4 py-2 border"),
-      th: Base("th", "px-4 py-2 border bg-gray-100"),
+      th: Base("th", "px-4 py-2 border bg-gray-200"),
     }}
   >
     <MDXContent />
