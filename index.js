@@ -7,6 +7,7 @@ import Deck from "./components/Deck";
 import Slide from "./components/Slide";
 import Appear from "./components/Appear";
 import Code from "./components/Code";
+import Aside from "./components/Aside";
 
 import MDXContent from "./content.mdx";
 
@@ -20,6 +21,7 @@ render(
       wrapper: Deck,
       Slide,
       Appear,
+      Aside,
       code: Code,
       h1: Base("h1", "text-center text-4xl"),
       h2: Base("h2", "text-center text-3xl"),
