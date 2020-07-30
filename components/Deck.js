@@ -1,11 +1,8 @@
-import React, { useState, useCallback, useMemo, useEffect } from "react";
+import React, { useCallback, useMemo } from "react";
+import useLocation from "wouter/use-location";
 
 import useEvent from "./useEvent";
 import Slide from "./Slide";
-
-const pushState = (currentIndex) => {
-  history.pushState({ currentIndex }, null, "/" + currentIndex);
-};
 
 export default function Deck({ children }) {
   const slides = useMemo(() => {
@@ -29,53 +26,30 @@ export default function Deck({ children }) {
     return slides;
   }, [children]);
 
-  const [currentIndex, setCurrentIndex] = useState(() => {
-    const [indexPath] = window.location.pathname
-      .split("/")
-      .filter((s) => s !== "");
+  const max = slides.length - 1;
+  const [location, setLocation] = useLocation();
+  const currentIndex = parseInt(location.split("/").filter((s) => !!s)[0], 10);
+  const setLocationIndex = (i) => setLocation(`/${i}`);
 
-    const initialIndex = parseInt(indexPath, 10);
-    const max = slides.length - 1;
-
-    if (Number.isNaN(initialIndex) || initialIndex < 0) {
-      pushState(0);
-      return 0;
-    } else if (max < initialIndex) {
-      pushState(max);
-      return max;
-    } else {
-      return initialIndex;
-    }
-  });
-
-  const updateIndexWithUrl = (index) => {
-    setCurrentIndex(index);
-    pushState(index);
-  };
+  if (Number.isNaN(currentIndex) || currentIndex < 0) {
+    setLocationIndex(0);
+  } else if (max < currentIndex) {
+    setLocationIndex(max);
+  }
 
   const handleNavigation = useCallback(
     (e) => {
       if (e.key === "ArrowRight") {
-        const nextOrMax = Math.min(currentIndex + 1, slides.length - 1);
-        updateIndexWithUrl(nextOrMax);
+        const nextOrMax = Math.min(currentIndex + 1, max);
+        setLocationIndex(nextOrMax);
       }
       if (e.key === "ArrowLeft") {
         const prevOrMin = Math.max(currentIndex - 1, 0);
-        updateIndexWithUrl(prevOrMin);
+        setLocationIndex(prevOrMin);
       }
     },
     [currentIndex, slides]
   );
-
-  useEffect(() => {
-    function syncToUrlBack(e) {
-      setCurrentIndex(e.state.currentIndex);
-    }
-    window.addEventListener("popstate", syncToUrlBack);
-    return () => {
-      window.removeEventListener("popstate", syncToUrlBack);
-    };
-  }, []);
 
   useEvent("keydown", handleNavigation);
 
