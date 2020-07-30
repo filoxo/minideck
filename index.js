@@ -8,6 +8,7 @@ import Slide from "./components/Slide";
 import Appear from "./components/Appear";
 import Code from "./components/Code";
 import Aside from "./components/Aside";
+import A from "./components/A";
 
 import MDXContent from "./content.mdx";
 
@@ -24,7 +25,7 @@ render(
       Aside,
       code: Code,
       inlineCode: Base("code", "bg-gray-200 px-1 rounded"),
-      a: Base("a", "underline"),
+      a: A,
       h1: Base("h1", "text-center text-4xl"),
       h2: Base("h2", "text-center text-3xl"),
       h3: Base("h3", "text-center text-2xl"),
