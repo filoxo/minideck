@@ -1,3 +1,7 @@
+/*
+- Finds all `Appear` children and controls when they appear based on if the slide is active
+- The animation between slides is defined and controlled here
+*/
 import React, { useRef } from "react";
 import cls from "classnames";
 import useAppearSequence from "./useAppearSequence";

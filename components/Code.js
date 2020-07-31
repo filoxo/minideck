@@ -1,3 +1,7 @@
+/*
+- Renders code blocks, defaults to `javascript` as the language
+- By default, it uses the Github theme
+*/
 import React from "react";
 import cls from "classnames";
 import Highlight, { defaultProps } from "prism-react-renderer";

@@ -1,3 +1,11 @@
+/*
+`Deck` does three things:
+
+- Iterates through the MDX document and groups elements between `---`s and puts them into `Slide`s
+- Tracks that current state of the active slide
+- Syncs current slide index to URL
+*/
+
 import React, { useCallback, useMemo } from "react";
 import useLocation from "wouter/use-location";
 
