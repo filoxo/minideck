@@ -35,7 +35,7 @@ const runTests = async () => {
     return getByText($document, "Appear");
   });
 
-  // Appear component shows elements
+  // Appear component shows and hides elements
   await page.keyboard.press("ArrowDown");
   await wait(() => getByText($document, "List item 1"));
   await page.keyboard.press("ArrowDown");
@@ -43,6 +43,8 @@ const runTests = async () => {
   await page.keyboard.press("ArrowDown");
   await wait(() => getByText($document, "List item 3"));
   await page.screenshot({ path: `e2e/slide-2.png` });
+  await page.keyboard.press("ArrowUp");
+  await page.waitForSelector('[data-appear="false"]', { state: "hidden" });
 
   await browser.close();
   await teardown();
