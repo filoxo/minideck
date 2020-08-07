@@ -1,5 +1,14 @@
-steps:
-  - uses: microsoft/playwright-github-action@v1
-  - name: Run your tests
-    run: npm test
-    on: pull_request
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  e2e-tests:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - uses: microsoft/playwright-github-action@v1
+      - name: Install dependencies and run tests
+        run: npm install && npm test
