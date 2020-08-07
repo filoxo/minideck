@@ -1,0 +1,5 @@
+steps:
+  - uses: microsoft/playwright-github-action@v1
+  - name: Run your tests
+    run: npm test
+    on: [pull_request]
