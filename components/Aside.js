@@ -1,5 +1,6 @@
 /*
-Many times, the Markdown `blockquote` ie. `>` is abused when in reality an `aside` element is more appropriate. This component should be used in those instances, which is almost always.
+Many times, the Markdown `blockquote` ie. `>` is abused when in reality an `aside` element is more appropriate.
+This component should be used in those instances, which is almost always.
 */
 import React from "react";
 import cls from "classnames";
