@@ -7,6 +7,22 @@
     @tailwind components;
     @tailwind utilities;
   </style>
+  <style>
+    /* Print styles */
+    @media print {
+      [data-appear="false"] {
+        visibility: visible;
+      }
+      .slide {
+        opacity: 1;
+        position: static;
+        transform: none;
+      }
+      .deck {
+        overflow: visible;
+      }
+    }
+  </style>
   <body>
     <main id="minideck"></main>
     <script src="./index.js"></script>

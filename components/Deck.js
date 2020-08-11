@@ -62,7 +62,7 @@ export default function Deck({ children }) {
   useEvent("keydown", handleNavigation);
 
   return (
-    <div className="w-screen h-screen overflow-hidden relative">
+    <div className="deck w-screen h-screen overflow-hidden relative">
       {slides.map((slideNodes, i) => (
         <Slide isActive={i === currentIndex} key={`slide-${i}`}>
           {slideNodes}
