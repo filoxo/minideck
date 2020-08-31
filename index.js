@@ -33,6 +33,7 @@ render(
       table: Base("table", "table-auto mx-auto"),
       td: Base("td", "px-4 py-2 border"),
       th: Base("th", "px-4 py-2 border bg-gray-200"),
+      img: (props) => <img {...props} src={require(props.src)} />,
     }}
   >
     <MDXContent />
