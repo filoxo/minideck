@@ -4,7 +4,7 @@ A simple MDX-powered deck.
 
 ## How it works
 
-This project uses:
+[Check out the demo!](https://minideck-demo.netlify.app/) This project uses:
 
 - [Parcel](https://parceljs.org/) for transpiling, serving, and building files
 - [MDX](https://mdxjs.com/) for authoring using Markdown syntax
