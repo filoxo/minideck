@@ -16,7 +16,17 @@ const useAppearSequence = (slideRef, isCurrentStep) => {
   useEffect(() => {
     appearNodes.current = Array.from(
       slideRef.current.querySelectorAll("[data-appear]")
-    );
+    ).sort((a, b) => {
+      const aOrder = parseInt(
+        a.dataset.appearOrder || Number.MAX_SAFE_INTEGER,
+        10
+      );
+      const bOrder = parseInt(
+        b.dataset.appearOrder || Number.MAX_SAFE_INTEGER,
+        10
+      );
+      return aOrder - bOrder;
+    });
   }, []);
 
   useEffect(() => {
