@@ -9,6 +9,7 @@ import Appear from "./components/Appear";
 import Code from "./components/Code";
 import Aside from "./components/Aside";
 import A from "./components/A";
+import Img from "./components/Img";
 
 import MDXContent from "./content.mdx";
 
@@ -34,6 +35,7 @@ render(
       table: Base("table", "table-auto mx-auto"),
       td: Base("td", "px-4 py-2 border"),
       th: Base("th", "px-4 py-2 border bg-gray-200"),
+      img: Img,
     }}
   >
     <MDXContent />
