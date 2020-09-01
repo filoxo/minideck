@@ -1,28 +1,31 @@
 <html>
-  <style>
-    :root {
-      font-size: 20px;
-    }
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-  </style>
-  <style>
-    /* Print styles */
-    @media print {
-      [data-appear="false"] {
-        visibility: visible;
+  <head>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <style>
+      :root {
+        font-size: 20px;
       }
-      .slide {
-        opacity: 1;
-        position: static;
-        transform: none;
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+    </style>
+    <style>
+      /* Print styles */
+      @media print {
+        [data-appear="false"] {
+          visibility: visible;
+        }
+        .slide {
+          opacity: 1;
+          position: static;
+          transform: none;
+        }
+        .deck {
+          overflow: visible;
+        }
       }
-      .deck {
-        overflow: visible;
-      }
-    }
-  </style>
+    </style>
+  </head>
   <body>
     <main id="minideck"></main>
     <script src="./index.js"></script>
