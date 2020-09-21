@@ -63,19 +63,17 @@ export default function Deck({ children }) {
   useEvent("keydown", handleNavigation);
 
   const swipeEvents = useMemo(() => {
-    return currentIndex
-      ? {
-          right: () => {
-            const prevOrMin = Math.max(currentIndex - 1, 0);
-            setLocationIndex(prevOrMin);
-          },
-          left: () => {
-            const nextOrMax = Math.min(currentIndex + 1, max);
-            setLocationIndex(nextOrMax);
-          },
-        }
-      : {};
-  });
+    return {
+      right: () => {
+        const prevOrMin = Math.max(currentIndex - 1, 0);
+        setLocationIndex(prevOrMin);
+      },
+      left: () => {
+        const nextOrMax = Math.min(currentIndex + 1, max);
+        setLocationIndex(nextOrMax);
+      },
+    };
+  }, [currentIndex]);
 
   useSwipeEvent(swipeEvents);
 
