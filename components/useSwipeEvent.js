@@ -1,6 +1,9 @@
 import { useMemo, useRef } from "react";
 import useEvent from "./useEvent";
 
+/*
+Bind a touch swipe event hander to window.
+*/
 const useSwipeEvent = ({ left, right, up, down }) => {
   const startX = useRef(0);
   const startY = useRef(0);

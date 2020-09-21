@@ -3,6 +3,10 @@ import useEvent from "./useEvent";
 
 const noop = () => {};
 
+/*
+This hook handles detecting and triggering a click event
+only if using a touch device.
+*/
 const useTouchClickEvent = (handler, isCurrentStep) => {
   const wasPreceededByTouch = useRef(false);
   const setWasPreceededByTouch = useCallback(() => {
@@ -19,6 +23,10 @@ const useTouchClickEvent = (handler, isCurrentStep) => {
   useEvent("click", handleClickAndReset);
 };
 
+/*
+Iterates through nodes, toggling their visibility classes, until the first
+node that already has the same value as `bool`.
+*/
 const flipAppearanceUntilFinding = (bool) => (node) => {
   const { appear } = node.dataset;
   node.dataset.appear = bool;
@@ -27,6 +35,12 @@ const flipAppearanceUntilFinding = (bool) => (node) => {
   bool = appear === "true";
 };
 
+/*
+Handles Appear (data-appear) elements and toggles their visibility in order.
+The sequence order can be controlled by using `data-appear-order`
+(alternatively, reorder them in the DOM). Appear sequence steps forward on
+ArrowDown (keyboard) and TouchClick, and steps backward on ArrowUp (keyboard).
+*/
 const useAppearSequence = (slideRef, isCurrentStep) => {
   const appearNodes = useRef();
 
