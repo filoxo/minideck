@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useCallback, useRef } from "react";
 import useEvent from "./useEvent";
 
 /*
@@ -8,18 +8,15 @@ const useSwipeEvent = ({ left, right, up, down }) => {
   const startX = useRef(0);
   const startY = useRef(0);
 
-  const handleTouchStart = useMemo(
-    () => (e) => {
-      if (e) {
-        startX.current = e.changedTouches[0].screenX;
-        startY.current = e.changedTouches[0].screenY;
-      }
-    },
-    []
-  );
+  const handleTouchStart = useCallback((e) => {
+    if (e) {
+      startX.current = e.changedTouches[0].screenX;
+      startY.current = e.changedTouches[0].screenY;
+    }
+  }, []);
 
-  const handleTouchEnd = useMemo(
-    () => (e) => {
+  const handleTouchEnd = useCallback(
+    (e) => {
       const { screenX, screenY } = e.changedTouches[0];
       const diffX = screenX - startX.current;
       const diffY = screenY - startY.current;
