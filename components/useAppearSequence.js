@@ -1,7 +1,32 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo, useCallback } from "react";
+import useEvent from "./useEvent";
 
 const noop = () => {};
 
+/*
+This hook handles detecting and triggering a click event
+only if using a touch device.
+*/
+const useTouchClickEvent = (handler, isCurrentStep) => {
+  const wasPreceededByTouch = useRef(false);
+  const setWasPreceededByTouch = useCallback(() => {
+    wasPreceededByTouch.current = isCurrentStep && true;
+  }, [isCurrentStep]);
+  const handleClickAndReset = useCallback(
+    (e) => {
+      if (isCurrentStep && wasPreceededByTouch.current && handler) handler(e);
+      wasPreceededByTouch.current = false;
+    },
+    [isCurrentStep, handler]
+  );
+  useEvent("touchstart", setWasPreceededByTouch);
+  useEvent("click", handleClickAndReset);
+};
+
+/*
+Iterates through nodes, toggling their visibility classes, until the first
+node that already has the same value as `bool`.
+*/
 const flipAppearanceUntilFinding = (bool) => (node) => {
   const { appear } = node.dataset;
   node.dataset.appear = bool;
@@ -10,6 +35,12 @@ const flipAppearanceUntilFinding = (bool) => (node) => {
   bool = appear === "true";
 };
 
+/*
+Handles Appear (data-appear) elements and toggles their visibility in order.
+The sequence order can be controlled by using `data-appear-order`
+(alternatively, reorder them in the DOM). Appear sequence steps forward on
+ArrowDown (keyboard) and TouchClick, and steps backward on ArrowUp (keyboard).
+*/
 const useAppearSequence = (slideRef, isCurrentStep) => {
   const appearNodes = useRef();
 
@@ -29,19 +60,27 @@ const useAppearSequence = (slideRef, isCurrentStep) => {
     });
   }, []);
 
-  useEffect(() => {
-    const handleAppearSequence = isCurrentStep
+  const forward = useCallback(() => {
+    appearNodes.current.forEach(flipAppearanceUntilFinding(true));
+  }, []);
+
+  const backward = useCallback(() => {
+    [...appearNodes.current]
+      .reverse()
+      .forEach(flipAppearanceUntilFinding(false));
+  }, []);
+
+  const handleAppearSequence = useMemo(() => {
+    return isCurrentStep
       ? (e) => {
           if (isCurrentStep) {
             switch (e.key) {
               case "ArrowUp": {
-                [...appearNodes.current]
-                  .reverse()
-                  .forEach(flipAppearanceUntilFinding(false));
+                backward();
                 break;
               }
               case "ArrowDown": {
-                appearNodes.current.forEach(flipAppearanceUntilFinding(true));
+                forward();
                 break;
               }
               default:
@@ -50,12 +89,11 @@ const useAppearSequence = (slideRef, isCurrentStep) => {
           }
         }
       : noop;
-
-    window.addEventListener("keydown", handleAppearSequence);
-    return () => {
-      window.removeEventListener("keydown", handleAppearSequence);
-    };
   }, [isCurrentStep]);
+
+  useEvent("keydown", handleAppearSequence);
+
+  useTouchClickEvent(forward, isCurrentStep);
 };
 
 export default useAppearSequence;
