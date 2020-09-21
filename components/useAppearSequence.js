@@ -1,4 +1,4 @@
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect, useMemo, useCallback } from "react";
 import useEvent from "./useEvent";
 import useSwipeEvent from "./useSwipeEvent";
 
@@ -31,21 +31,15 @@ const useAppearSequence = (slideRef, isCurrentStep) => {
     });
   }, []);
 
-  const forward = useMemo(
-    () => () => {
-      [...appearNodes.current]
-        .reverse()
-        .forEach(flipAppearanceUntilFinding(false));
-    },
-    []
-  );
+  const forward = useCallback(() => {
+    [...appearNodes.current]
+      .reverse()
+      .forEach(flipAppearanceUntilFinding(false));
+  }, []);
 
-  const backward = useMemo(
-    () => () => {
-      appearNodes.current.forEach(flipAppearanceUntilFinding(true));
-    },
-    []
-  );
+  const backward = useCallback(() => {
+    appearNodes.current.forEach(flipAppearanceUntilFinding(true));
+  }, []);
 
   const handleAppearSequence = useMemo(() => {
     return isCurrentStep
