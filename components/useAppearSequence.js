@@ -1,8 +1,23 @@
 import { useRef, useEffect, useMemo, useCallback } from "react";
 import useEvent from "./useEvent";
-import useSwipeEvent from "./useSwipeEvent";
 
 const noop = () => {};
+
+const useTouchClickEvent = (handler, isCurrentStep) => {
+  const wasPreceededByTouch = useRef(false);
+  const setWasPreceededByTouch = useCallback(() => {
+    wasPreceededByTouch.current = isCurrentStep && true;
+  }, [isCurrentStep]);
+  const handleClickAndReset = useCallback(
+    (e) => {
+      if (isCurrentStep && wasPreceededByTouch.current && handler) handler(e);
+      wasPreceededByTouch.current = false;
+    },
+    [isCurrentStep, handler]
+  );
+  useEvent("touchstart", setWasPreceededByTouch);
+  useEvent("click", handleClickAndReset);
+};
 
 const flipAppearanceUntilFinding = (bool) => (node) => {
   const { appear } = node.dataset;
@@ -32,13 +47,13 @@ const useAppearSequence = (slideRef, isCurrentStep) => {
   }, []);
 
   const forward = useCallback(() => {
-    [...appearNodes.current]
-      .reverse()
-      .forEach(flipAppearanceUntilFinding(false));
+    appearNodes.current.forEach(flipAppearanceUntilFinding(true));
   }, []);
 
   const backward = useCallback(() => {
-    appearNodes.current.forEach(flipAppearanceUntilFinding(true));
+    [...appearNodes.current]
+      .reverse()
+      .forEach(flipAppearanceUntilFinding(false));
   }, []);
 
   const handleAppearSequence = useMemo(() => {
@@ -47,11 +62,11 @@ const useAppearSequence = (slideRef, isCurrentStep) => {
           if (isCurrentStep) {
             switch (e.key) {
               case "ArrowUp": {
-                forward();
+                backward();
                 break;
               }
               case "ArrowDown": {
-                backward();
+                forward();
                 break;
               }
               default:
@@ -64,18 +79,7 @@ const useAppearSequence = (slideRef, isCurrentStep) => {
 
   useEvent("keydown", handleAppearSequence);
 
-  const appearSwipeEvents = useMemo(
-    () =>
-      isCurrentStep
-        ? {
-            up: forward,
-            down: backward,
-          }
-        : {},
-    [isCurrentStep]
-  );
-
-  useSwipeEvent(appearSwipeEvents);
+  useTouchClickEvent(forward, isCurrentStep);
 };
 
 export default useAppearSequence;
