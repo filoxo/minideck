@@ -10,6 +10,7 @@ import React, { useCallback, useMemo } from "react";
 import useLocation from "wouter/use-location";
 
 import useEvent from "./useEvent";
+import useSwipeEvent from "./useSwipeEvent";
 import Slide from "./Slide";
 
 export default function Deck({ children }) {
@@ -60,6 +61,23 @@ export default function Deck({ children }) {
   );
 
   useEvent("keydown", handleNavigation);
+
+  const swipeEvents = useMemo(() => {
+    return currentIndex
+      ? {
+          right: () => {
+            const prevOrMin = Math.max(currentIndex - 1, 0);
+            setLocationIndex(prevOrMin);
+          },
+          left: () => {
+            const nextOrMax = Math.min(currentIndex + 1, max);
+            setLocationIndex(nextOrMax);
+          },
+        }
+      : {};
+  });
+
+  useSwipeEvent(swipeEvents);
 
   return (
     <div className="deck w-screen h-screen overflow-hidden relative">
