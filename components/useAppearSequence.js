@@ -1,4 +1,6 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from "react";
+import useEvent from "./useEvent";
+import useSwipeEvent from "./useSwipeEvent";
 
 const noop = () => {};
 
@@ -29,19 +31,33 @@ const useAppearSequence = (slideRef, isCurrentStep) => {
     });
   }, []);
 
-  useEffect(() => {
-    const handleAppearSequence = isCurrentStep
+  const forward = useMemo(
+    () => () => {
+      [...appearNodes.current]
+        .reverse()
+        .forEach(flipAppearanceUntilFinding(false));
+    },
+    []
+  );
+
+  const backward = useMemo(
+    () => () => {
+      appearNodes.current.forEach(flipAppearanceUntilFinding(true));
+    },
+    []
+  );
+
+  const handleAppearSequence = useMemo(() => {
+    return isCurrentStep
       ? (e) => {
           if (isCurrentStep) {
             switch (e.key) {
               case "ArrowUp": {
-                [...appearNodes.current]
-                  .reverse()
-                  .forEach(flipAppearanceUntilFinding(false));
+                forward();
                 break;
               }
               case "ArrowDown": {
-                appearNodes.current.forEach(flipAppearanceUntilFinding(true));
+                backward();
                 break;
               }
               default:
@@ -50,12 +66,22 @@ const useAppearSequence = (slideRef, isCurrentStep) => {
           }
         }
       : noop;
-
-    window.addEventListener("keydown", handleAppearSequence);
-    return () => {
-      window.removeEventListener("keydown", handleAppearSequence);
-    };
   }, [isCurrentStep]);
+
+  useEvent("keydown", handleAppearSequence);
+
+  const appearSwipeEvents = useMemo(
+    () =>
+      isCurrentStep
+        ? {
+            up: forward,
+            down: backward,
+          }
+        : {},
+    [isCurrentStep]
+  );
+
+  useSwipeEvent(appearSwipeEvents);
 };
 
 export default useAppearSequence;
