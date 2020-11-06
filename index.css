@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-size: 20px;
+}
+
+/* Print styles */
+@media print {
+  [data-appear='false'],
+  .invisible {
+    visibility: visible;
+  }
+  .slide {
+    opacity: 1;
+    position: static;
+    transform: none;
+  }
+  .deck {
+    overflow: visible;
+  }
+}
