@@ -18,7 +18,7 @@ Instead of making this an npm package that requires a configuration api, simply 
 
 ```sh
 # first
-npx degit filoxo/minideck your-presentation-name
+npx degit filoxo/minideck#main your-presentation-name
 # then
 yarn install
 # and finally
