@@ -9,9 +9,7 @@
 import React, { useCallback, useMemo } from "react";
 import useLocation from "wouter/use-location";
 
-import useEvent from "./useEvent";
-import useSwipeEvent from "./useSwipeEvent";
-import Slide from "./Slide";
+// import ProgressIndicator from './ProgressIndicator';
 
 export default function Deck({ children }) {
   const slides = useMemo(() => {
@@ -84,6 +82,11 @@ export default function Deck({ children }) {
           {slideNodes}
         </Slide>
       ))}
+      {/* <ProgressIndicator
+        currentIndex={currentIndex}
+        max={max}
+        type={ProgressIndicator.LINE}
+      /> */}
     </div>
   );
 }
