@@ -9,12 +9,12 @@ A simple MDX-powered deck.
 - [Parcel](https://parceljs.org/) for transpiling, serving, and building files
 - [MDX](https://mdxjs.com/) for authoring using Markdown syntax
 - [React](https://reactjs.org/) custom components
-- [Tailwind CSS](https://tailwindcss.com/) & [remark-attr](https://github.com/arobase-che/remark-attr#readme) for styling
-- [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer) for styling code blocks
+- [Tailwind CSS](https://tailwindcss.com/) utility classes, plus [remark-attr](https://github.com/arobase-che/remark-attr#readme) and [classnames](https://github.com/JedWatson/classnames#readme) for ease of use
+- [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer) for parsing and styling code blocks
 
 ## Usage
 
-Instead of making this an npm package that requires a configuration api, simply use [degit](https://github.com/Rich-Harris/degit) to copy these project files over to act as scaffolding for your own deck.
+Instead of making this an npm package that requires a configuration api, simply use [degit](https://github.com/Rich-Harris/degit) to copy these project files over as scaffolding for your own deck.
 
 ```sh
 # first
@@ -30,7 +30,7 @@ yarn start
 Generate a production-ready version of your slide deck. This is ideal for deploying your slides as static assets and making them publicly available.
 
 ```sh
-# build
+# build to dist/
 yarn build
 # serve prod locally; recommended for better perf when presenting
 npx serve -d dist
@@ -41,14 +41,14 @@ npx serve -d dist
 Again, rather than requiring configuration, you have access to all of the underlying components and tooling. Need to change something? Just find the file and tweak it.
 
 - Add your own presentation content in `content.mdx`
-- Change the styling? Add [Tailwind classes](https://nerdcave.com/tailwind-cheat-sheet) by either:
+- Import your own components in `content.mdx`, or add them to the `components` list in `index.js` to make them globally available to the MDX file
+- Want change the styling?
+  - Use [Tailwind classes](https://nerdcave.com/tailwind-cheat-sheet) throughout by either
+    - using inline attribute syntax (learn more at the [remark-attr repo](https://github.com/arobase-che/remark-attr#readme))
 
-  - using inline attribute syntax (learn more at the [remark-attr repo](https://github.com/arobase-che/remark-attr#readme))
+        `_Warning!_{.text-red-500}`
 
-    `_Warning!_{.text-red-500}`
-
-  - or in your MDX components, optionally with [classnames](https://github.com/JedWatson/classnames#readme) for conditional logic
-
+    - or in components, optionally with [classnames](https://github.com/JedWatson/classnames#readme) for conditional logic
+  - Or add a different prebuilt CSS theme into the index.html
 - Change the code theme? Change the imported theme in `Code.js`
-- Add more components? Import them in `content.mdx`, or add them to the `components` list in `index.js`
-- Add more features? Feel free to send a PR that you think would help everyone!
+- More features? Feel free to send a PR that you think would help everyone!
