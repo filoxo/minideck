@@ -78,7 +78,6 @@ export default function Deck({ children }) {
 
   useSwipeEvent(swipeEvents);
 
-  console.log('currentIndex', currentIndex)
   return (
     <div className="deck w-screen h-screen overflow-hidden relative">
       {slides.map((slideNodes, i) => (
