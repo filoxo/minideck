@@ -13,7 +13,7 @@ import { useState, useLayoutEffect } from "react";
 // returns the current hash location in a normalized form
 // (excluding the leading '#' symbol)
 const currentLocation = () => window.location.hash.replace(/^#/, "") || "/";
-const navigate = (to) => (window.location.hash = to);
+export const navigate = (to) => (window.location.hash = to);
 const useHashLocation = () => {
   const [loc, setLoc] = useState(currentLocation());
   useLayoutEffect(() => {
