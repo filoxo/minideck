@@ -7,7 +7,7 @@
 */
 
 import React, { useCallback, useMemo } from 'react';
-import useLocation from 'wouter/use-location';
+import useHashLocation from "./useHashLocation"; 
 
 import useEvent from './useEvent';
 import useSwipeEvent from './useSwipeEvent';
@@ -37,9 +37,9 @@ export default function Deck({ children }) {
   }, [children]);
 
   const max = slides.length - 1;
-  const [location, setLocation] = useLocation();
-  const currentIndex = parseInt(location.split('/').filter((s) => !!s)[0], 10);
-  const setLocationIndex = (i) => setLocation(`/${i}`);
+  const [hashLocation, navigateHashLocation] = useHashLocation();
+  const currentIndex = parseInt(hashLocation.split('/').filter(Boolean)[0], 10);
+  const setLocationIndex = (i) => navigateHashLocation(`#/${i}`);
 
   if (Number.isNaN(currentIndex) || currentIndex < 0) {
     setLocationIndex(0);
@@ -78,6 +78,7 @@ export default function Deck({ children }) {
 
   useSwipeEvent(swipeEvents);
 
+  console.log('currentIndex', currentIndex)
   return (
     <div className="deck w-screen h-screen overflow-hidden relative">
       {slides.map((slideNodes, i) => (
