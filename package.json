@@ -27,8 +27,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "remark-attr": "^0.10.0",
-    "tailwindcss": "^1.4.4",
-    "wouter": "^2.7.4"
+    "tailwindcss": "^1.4.4"
   },
   "devDependencies": {
     "jest-process-manager": "^0.2.5",
