@@ -27,12 +27,11 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "remark-attr": "^0.10.0",
-    "tailwindcss": "^1.4.4",
-    "wouter": "^2.5.1"
+    "tailwindcss": "^1.4.4"
   },
   "devDependencies": {
     "jest-process-manager": "^0.2.5",
-    "playwright": "^1.2.1",
-    "playwright-testing-library": "^2.2.0"
+    "playwright": "^1.14.1",
+    "playwright-testing-library": "^3.0.0"
   }
 }

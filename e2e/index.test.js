@@ -29,7 +29,7 @@ const runTests = async () => {
   await page.screenshot({ path: `e2e/slide-1.png` });
 
   // Navigating to valid page shows correct content
-  await page.goto("http://localhost:9999/2");
+  await page.goto("http://localhost:9999/#/2");
   await wait(async () => {
     $document = await getDocument(page);
     return getByText($document, "Appear");

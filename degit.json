@@ -1,6 +1,9 @@
 [
   {
     "action": "remove",
-    "files": [".github", "e2e", "netlify.toml"]
+    "files": [
+      ".github",
+      "e2e"
+    ]
   }
 ]

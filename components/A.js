@@ -1,6 +1,14 @@
 import React from "react";
-import { Link } from "wouter";
 import cls from "classnames";
+import { navigate } from './useHashLocation'; 
+
+const Link = (props) => {
+  const onClick = (e) => {
+    e.preventDefault();
+    navigate(props.href)
+  }
+  return <a {...props} onClick={onClick} />
+}
 
 /*
 Anchors are rendered using normal Markdown syntax.
