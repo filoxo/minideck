@@ -5,7 +5,7 @@
   "scripts": {
     "build": "parcel build index.html",
     "start": "parcel index.html -p 9999",
-    "test": "node e2e/index.test.js --unhandled-rejections=strict"
+    "test": "node e2e/index.test.js"
   },
   "author": "Carlos Filoteo",
   "license": "MIT",
