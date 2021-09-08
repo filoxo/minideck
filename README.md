@@ -50,5 +50,5 @@ Again, rather than requiring configuration, you have access to all of the underl
 
     - or in components, optionally with [classnames](https://github.com/JedWatson/classnames#readme) for conditional logic
   - Or add a different prebuilt CSS theme into the index.html
-- Change the code theme? Change the imported theme in `Code.js`
+- Change the code theme? Change the imported theme in `Code.js` (see [available themes in prism-react-renderer source](https://github.com/FormidableLabs/prism-react-renderer/tree/master/src/themes))
 - More features? Feel free to send a PR that you think would help everyone!
