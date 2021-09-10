@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 /*
-Bind a DOM event hander to a target.
+Bind a DOM event handler to a target.
 */
 const useEvent = (name, handler, target = window, options) => {
   useEffect(() => {
