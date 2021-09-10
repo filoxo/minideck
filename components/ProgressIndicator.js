@@ -24,13 +24,13 @@ export default function ProgressIndicator({
         />
       );
     default:
-      throw new Error('Unknown ProgressIndicator type! Received ' + type);
+      throw new Error("Unknown ProgressIndicator type! Received " + type);
   }
 }
 
-ProgressIndicator.LINE = 'line';
-ProgressIndicator.DOT = 'dot';
-ProgressIndicator.NUMBER = 'number';
+ProgressIndicator.LINE = "line";
+ProgressIndicator.DOT = "dot";
+ProgressIndicator.NUMBER = "number";
 
 /*
 This doesn't seem to fit the [ARIA definition of a progressbar](https://www.w3.org/TR/wai-aria-1.1/#progressbar).
@@ -52,9 +52,10 @@ function LineProgressIndicator({ progress }) {
 }
 
 function DotProgressIndicator({ currentIndex, numberOfSteps }) {
-  const dots = useMemo(() => Array.from(new Array(numberOfSteps), () => Dot), [
-    numberOfSteps,
-  ]);
+  const dots = useMemo(
+    () => Array.from(new Array(numberOfSteps), () => Dot),
+    [numberOfSteps]
+  );
 
   return (
     <div
