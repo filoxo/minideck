@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo } from "react";
+import cls from "classnames";
 
 export default function ProgressIndicator({
   type = ProgressIndicator.LINE,
@@ -70,9 +71,10 @@ function DotProgressIndicator({ currentIndex, numberOfSteps }) {
 function Dot({ active }) {
   return (
     <span
-      className={`w-2 pb-2 rounded-full mx-1 ${
-        active ? 'bg-blue-400' : 'bg-gray-400'
-      }`}
+      className={cls("w-2 pb-2 rounded-full mx-1", {
+        "bg-blue-400": active,
+        "bg-gray-400": !active,
+      })}
     ></span>
   );
 }
