@@ -7,7 +7,7 @@
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node e2e/index.test.js"
+    "test": "playwright test --browser=chromium"
   },
   "author": "Carlos Filoteo",
   "license": "MIT",
@@ -28,8 +28,6 @@
     "vite-plugin-mdx": "^3.5.10"
   },
   "devDependencies": {
-    "jest-process-manager": "^0.2.5",
-    "playwright": "^1.14.1",
-    "playwright-testing-library": "^3.0.0"
+    "@playwright/test": "^1.16.3"
   }
 }
