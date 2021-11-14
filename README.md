@@ -49,6 +49,6 @@ Again, rather than requiring configuration, you have access to all of the underl
         `_Warning!_{.text-red-500}`
 
     - or in components, optionally with [classnames](https://github.com/JedWatson/classnames#readme) for conditional logic
-  - Or import a different prebuilt CSS theme
-- Want a different the code theme? Change the imported theme in `Code.jsx`
+  - Or add a different prebuilt CSS theme into the index.html
+- Want a different the code theme? Change the imported theme in `Code.jsx` (see [available themes in prism-react-renderer source](https://github.com/FormidableLabs/prism-react-renderer/tree/master/src/themes))
 - More features? Feel free to send a PR that you think would help everyone!
