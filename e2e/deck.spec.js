@@ -33,13 +33,14 @@ test('Navigating to valid page shows correct content', async ({ page }) => {
 
 test('Appear component shows and hides elements', async ({ page }) => {
   await page.goto("/#/2"); // Change this if order of slides changes
+  await page.waitForSelector('text="List item 1"', { state: "hidden" });
   await page.keyboard.press("ArrowDown");
-  await page.locator('text=List item 1').first();
+  await page.waitForSelector('text="List item 1"', { state: "visible" });
   await page.keyboard.press("ArrowDown");
-  await page.locator('text=List item 2').first();
+  await page.waitForSelector('text="List item 2"', { state: "visible" });
   await page.keyboard.press("ArrowDown");
-  await page.locator('text=List item 3').first();
+  await page.waitForSelector('text="List item 3"', { state: "visible" });
   await page.keyboard.press("ArrowUp");
-  await page.waitForSelector('[data-appear="false"]', { state: "hidden" });
+  await page.waitForSelector('text="List item 3"', { state: "hidden" });
   expect(await page.screenshot()).toMatchSnapshot('slide-2.png');
 });
