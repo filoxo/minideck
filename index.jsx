@@ -2,7 +2,6 @@ import React from "react";
 import { render } from "react-dom";
 import cls from "classnames";
 import { MDXProvider } from "@mdx-js/react";
-import './index.css';
 
 import Deck from "./components/Deck";
 import Slide from "./components/Slide";
