@@ -81,7 +81,7 @@ export default function Deck({ children }) {
   return (
     <div className="deck w-screen h-screen overflow-hidden relative">
       {slides.map((slideNodes, i) => (
-        <Slide isActive={i === currentIndex} key={`slide-${i}`}>
+        <Slide isActive={i === currentIndex} key={`slide-${i}`} id={`slide-${i}`}>
           {slideNodes}
         </Slide>
       ))}

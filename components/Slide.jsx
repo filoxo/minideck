@@ -21,6 +21,7 @@ export default function Slide({ children, isActive, ...props }) {
           "opacity-0 translate-y-full invisible": !isActive,
         }
       )}
+      hidden={!isActive}
       aria-current={isActive ? "step" : null}
       {...props}
     >
