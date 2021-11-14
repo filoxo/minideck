@@ -3,7 +3,8 @@
     "action": "remove",
     "files": [
       ".github",
-      "e2e"
+      "e2e",
+      "playwright.config.js"
     ]
   }
 ]
