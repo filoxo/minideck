@@ -16,5 +16,6 @@ jobs:
         run: yarn install --frozen-lockfile 
       - name: Run tests
         run: |
+          npx playwright install-deps
           npx playwright install-deps chromium
           yarn test
