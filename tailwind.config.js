@@ -4,7 +4,7 @@ module.exports = {
   },
   purge: [
     './index.html',
-    './index.js',
+    './index.{js,jsx}',
     './components/**/*.{js,jsx}',
     './content.mdx',
   ],
