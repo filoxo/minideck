@@ -13,18 +13,23 @@ import { useState, useLayoutEffect } from "react";
 // returns the current hash location in a normalized form
 // (excluding the leading '#' symbol)
 const currentLocation = () => window.location.hash.replace(/^#/, "") || "/";
-export const navigate = (to) => (window.location.hash = to);
+
+const navigate = (to) => (window.location.hash = to);
+
 const useHashLocation = () => {
   const [loc, setLoc] = useState(currentLocation());
+  
   useLayoutEffect(() => {
-    // this function is called whenever the hash changes
-    const handler = () => setLoc(currentLocation());
+    const onHashChange = () => setLoc(currentLocation());
     // subscribe to hash changes
-    window.addEventListener("hashchange", handler);
-    return () => window.removeEventListener("hashchange", handler);
+    window.addEventListener("hashchange", onHashChange);
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+    }
   }, []);
   
   return [loc, navigate];
 };
 
+export navigate
 export default useHashLocation;
