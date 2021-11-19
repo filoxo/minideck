@@ -11,8 +11,8 @@ const Link = (props) => {
 }
 
 /*
-Anchors are rendered using normal Markdown syntax.
-If the url is a "local link", it renders a wouter Link. Otherwise, uses a normal anchor tag.
+Anchors are rendered using normal Markdown syntax, eg. `[my link](https://www.my.link/somewhere)`
+If the url is a "local link", it renders a client-side routing Link. Otherwise, uses a normal anchor tag.
 */
 export default function A(props) {
   const isLocalLink = props.href.startsWith("/");
