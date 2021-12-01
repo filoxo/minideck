@@ -1,3 +1,5 @@
+// @ts-check
+
 /*
 Hash routing is ideal for this application because otherwise the
 server to which the deck is deployed would need to be configured
@@ -10,12 +12,17 @@ https://github.com/molefrog/wouter#customizing-the-location-hook
 
 import { useState, useLayoutEffect } from "react";
 
-// returns the current hash location in a normalized form
-// (excluding the leading '#' symbol)
+/**
+ * @returns { string } the current hash location in a normalized form (excludes the leading #)
+ */
 const currentLocation = () => window.location.hash.replace(/^#/, "") || "/";
 
+/**
+ * @param { string } to - the new location to navigate to
+ */
 export const navigate = (to) => (window.location.hash = to);
 
+/** @returns { [string, function] } */
 const useHashLocation = () => {
   const [loc, setLoc] = useState(currentLocation());
   

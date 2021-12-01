@@ -1,3 +1,4 @@
+// @ts-check
 /*
 Wraps the rendered element in hidden styling.
 The useAppearSequence hook modifies the visibility of this component directly.
