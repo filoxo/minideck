@@ -7,7 +7,7 @@ import React from "react";
 import cls from "classnames";
 
 /**
- * @param { Object } props
+ * @param { object } props
  * @param { boolean } [props.info] - display using info accent color (blue)
  * @param { boolean } [props.warning] - display using warning accent color (red)
  * @param { JSX.Element } props.children

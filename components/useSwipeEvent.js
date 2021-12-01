@@ -1,9 +1,15 @@
 import { useCallback, useRef } from "react";
 import useEvent from "./useEvent";
 
-/*
-Bind a touch swipe event hander to window.
-*/
+/**
+ * Bind a touch swipe event hander to window.
+ *
+ * @param { object } props
+ * @param { function } [props.left] - Callback on left swipe.
+ * @param { function } [props.right] - Callback on right swipe.
+ * @param { function } [props.up] - Callback on up swipe.
+ * @param { function } [props.down] - Callback on down swipe.
+ */
 const useSwipeEvent = ({ left, right, up, down }) => {
   const startX = useRef(0);
   const startY = useRef(0);
@@ -26,11 +32,11 @@ const useSwipeEvent = ({ left, right, up, down }) => {
 
       if (absDiff < 30) return; // Ignore small movements.
       if (ratioX > ratioY) {
-        if (diffX >= 0) right && right();
-        else left && left();
+        if (diffX >= 0) right?.();
+        else left?.();
       } else {
-        if (diffY >= 0) down && down();
-        else up && up();
+        if (diffY >= 0) down?.();
+        else up?.();
       }
     },
     [left, right, up, down]

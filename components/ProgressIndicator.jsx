@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 /**
  * @param { object } props
- * @param { string } [props.type] - 'line', 'dot', or 'number'
+ * @param { string } [props.type] - 'line' (default) | 'dot' | 'number'
  * @param { number } props.currentIndex - the current step index
  * @param { number } props.max - the total number of steps
  */
@@ -41,7 +41,7 @@ ProgressIndicator.NUMBER = 'number';
 /**
  * Display a visual progress bar spanning across the bottom of the deck.
  * 
- * @param { Object } props
+ * @param { object } props
  * @param { number } props.progress - current progress as percent (0-100)
  */
 // This doesn't seem to fit the [ARIA definition of a progressbar](https://www.w3.org/TR/wai-aria-1.1/#progressbar).
@@ -64,7 +64,7 @@ function LineProgressIndicator({ progress }) {
 /**
  * Display a progression of dots to show slide progress.
  * 
- * @param { Object } props
+ * @param { object } props
  * @param { number } props.currentIndex - current slide index
  * @param { number } props.numberOfSteps - total number of slides
  */
@@ -98,7 +98,7 @@ function Dot({ active }) {
 /**
  * Display a numerical indicator of slide progress.
  * 
- * @param { Object } props
+ * @param { object } props
  * @param { number } props.currentStep - current slide step
  * @param { number } props.numberOfSteps - total number of slides
  */
