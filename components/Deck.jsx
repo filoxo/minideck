@@ -1,11 +1,3 @@
-/*
-`Deck` does three things:
-
-- Iterates through the MDX document and groups elements between `---`s and puts them into `Slide`s
-- Tracks that current state of the active slide
-- Syncs current slide index to URL
-*/
-
 import React, { useCallback, useMemo } from 'react';
 import useHashLocation from "./useHashLocation"; 
 
@@ -14,6 +6,13 @@ import useSwipeEvent from './useSwipeEvent';
 import Slide from './Slide';
 // import ProgressIndicator from './ProgressIndicator';
 
+/**
+ * `Deck` does three things:
+ * 
+ * - Iterates through the MDX document and groups elements between `---`s and puts them into `Slide`s
+ * - Tracks that current state of the active slide
+ * - Syncs current slide index to URL
+ */
 export default function Deck({ children }) {
   const slides = useMemo(() => {
     const { slides } = React.Children.toArray(children).reduce(
