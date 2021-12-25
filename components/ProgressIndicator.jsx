@@ -2,6 +2,8 @@
 import React, { useMemo } from 'react';
 
 /**
+ * Display a visual progress indicator of multiple styles to show slide progress.
+ * 
  * @param { object } props
  * @param { string } [props.type] - 'line' (default) | 'dot' | 'number'
  * @param { number } props.currentIndex - the current step index
@@ -41,12 +43,13 @@ ProgressIndicator.NUMBER = 'number';
 /**
  * Display a visual progress bar spanning across the bottom of the deck.
  * 
+ * NOTE: This doesn't seem to fit the [ARIA definition of a progressbar](https://www.w3.org/TR/wai-aria-1.1/#progressbar).
+ * Also, that state is communicated through [aria-current](https://www.w3.org/TR/wai-aria-1.1/#aria-current) on the Slide component, 
+ * so this and the other progress types will be aria-hidden as they're only visual indicators.
+ * 
  * @param { object } props
  * @param { number } props.progress - current progress as percent (0-100)
  */
-// This doesn't seem to fit the [ARIA definition of a progressbar](https://www.w3.org/TR/wai-aria-1.1/#progressbar).
-// Also, that state is communicated through [aria-current](https://www.w3.org/TR/wai-aria-1.1/#aria-current) on the Slide component, 
-// so this and the other progress types will be aria-hidden as they're only visual indicators.
 function LineProgressIndicator({ progress }) {
   return (
     <div
