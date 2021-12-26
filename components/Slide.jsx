@@ -15,7 +15,7 @@ export default function Slide({ children, isActive, ...props }) {
     <section
       ref={slideRef}
       className={cls(
-        "slide p-2 w-screen h-screen absolute flex items-center justify-center transition-opacity duration-300 transform",
+        "slide p-2 w-screen h-screen absolute flex items-center justify-center transition-opacity duration-300",
         {
           "opacity-100 translate-y-0": isActive,
           "opacity-0 translate-y-full invisible": !isActive,
