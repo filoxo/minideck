@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A minimal slide deck builder using React and MDX",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "vite",
     "build": "vite build",

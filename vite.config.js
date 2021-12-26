@@ -1,14 +1,14 @@
-import reactRefresh from '@vitejs/plugin-react-refresh'
-import mdx from 'vite-plugin-mdx'
-import remarkAttr from 'remark-attr'
+import postcssConfig from "./postcss.config.js";
+import reactRefresh from "@vitejs/plugin-react-refresh";
+import remarkAttr from "remark-attr";
 
 const mdxOptions = {
   remarkPlugins: [remarkAttr],
-}
+};
 
 export default {
-  plugins: [
-    reactRefresh(), 
-    mdx(mdxOptions)
-  ],
-}
+  css: {
+    postcss: postcssConfig,
+  },
+  plugins: [reactRefresh(), mdx(mdxOptions)],
+};

@@ -1,13 +1,12 @@
-module.exports = {
+export default {
   theme: {
     extend: {},
   },
-  purge: [
-    './index.html',
-    './index.{js,jsx}',
-    './components/**/*.{js,jsx}',
-    './content.mdx',
+  content: [
+    "./index.html",
+    "./index.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./content.mdx",
   ],
-  variants: {},
   plugins: [],
 };
