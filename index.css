@@ -8,7 +8,7 @@
 
 /* Print styles */
 @media print {
-  [data-appear='false'],
+  [data-appear="false"],
   .invisible {
     visibility: visible;
   }
