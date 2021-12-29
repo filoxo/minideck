@@ -6,26 +6,6 @@ import React from "react";
 import cls from "classnames";
 import "./code-theme.css";
 
-export default ({ children, className = "javascript" }) => {
-  const language = className.replace(/language-/, "");
-  return (
-    <Highlight
-      {...defaultProps}
-      code={children}
-      language={language}
-      theme={theme}
-    >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre className={cls(className, "p-4 rounded")} style={style}>
-          {tokens.map((line, i) => (
-            <div key={i} {...getLineProps({ line, key: i })}>
-              {line.map((token, key) => (
-                <span key={key} {...getTokenProps({ token, key })} />
-              ))}
-            </div>
-          ))}
-        </pre>
-      )}
-    </Highlight>
-  );
-};
+export default function Code({ children, className }) {
+  return <code className={cls(className, "p-4 rounded")}>{children}</code>;
+}
