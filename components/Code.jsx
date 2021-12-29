@@ -4,8 +4,7 @@
 */
 import React from "react";
 import cls from "classnames";
-import Highlight, { defaultProps } from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/github";
+import "./code-theme.css";
 
 export default ({ children, className = "javascript" }) => {
   const language = className.replace(/language-/, "");
