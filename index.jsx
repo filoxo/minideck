@@ -12,9 +12,8 @@ import A from "./components/A";
 
 import MDXContent from "./content.mdx";
 
-const Base = (C, classnames) => (props) => (
-  <C {...props} className={cls(classnames, props.className)} />
-);
+const Base = (C, classnames) => (props) =>
+  <C {...props} className={cls(classnames, props.className)} />;
 
 render(
   <React.StrictMode>
@@ -40,5 +39,5 @@ render(
       <MDXContent />
     </MDXProvider>
   </React.StrictMode>,
-  document.getElementById('minideck')
-)
+  document.getElementById("minideck")
+);
