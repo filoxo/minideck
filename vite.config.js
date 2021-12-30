@@ -7,18 +7,13 @@ import { highlightHast, Language } from "tree-sitter-highlight";
 
 function syntaxHighlightingPlugin() {
   function getLang(lang) {
-    const langStr = lang.split("-")[1]; // "language-js" => "js"
+    let langStr = lang.split("-")[1]?.toUpperCase(); // "language-js" => "JS"
     if (!langStr) {
       throw new Error(`Unable to get language from class "${langStr}"`);
     }
-    const langMapping = {
-      js: Language.JS,
-      jsx: Language.JSX,
-      ts: Language.TS,
-      tsx: Language.TSX,
-      css: Language.CSS,
-    };
-    const lang = langMapping[langStr];
+    if (langStr === "JAVASCRIPT") langStr = "JS";
+    if (langStr === "TYPESCRIPT") langStr = "TS";
+    const lang = Language[langStr];
 
     if (!lang) {
       throw new Error(
