@@ -13,15 +13,15 @@ function syntaxHighlightingPlugin() {
     }
     if (langStr === "JAVASCRIPT") langStr = "JS";
     if (langStr === "TYPESCRIPT") langStr = "TS";
-    const lang = Language[langStr];
+    const supportedLang = Language[langStr];
 
-    if (!lang) {
+    if (supportedLang === undefined) {
       throw new Error(
-        `Unsupported language: ${lang}. See https://github.com/devongovett/tree-sitter-highlight/issues/2 for information about additional grammar support.`
+        `Unsupported language: ${langStr}. See https://github.com/devongovett/tree-sitter-highlight/issues/2 for information about additional grammar support.`
       );
     }
 
-    return lang;
+    return supportedLang;
   }
 
   return (tree, file) => {
