@@ -1,3 +1,4 @@
+// @ts-check
 import React from "react";
 import cls from "classnames";
 import { navigate } from './useHashLocation'; 

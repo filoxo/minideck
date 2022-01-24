@@ -1,5 +1,14 @@
+// @ts-check
 import React, { useMemo } from 'react';
 
+/**
+ * Display a visual progress indicator of multiple styles to show slide progress.
+ * 
+ * @param { object } props
+ * @param { string } [props.type] - 'line' (default) | 'dot' | 'number'
+ * @param { number } props.currentIndex - the current step index
+ * @param { number } props.max - the total number of steps
+ */
 export default function ProgressIndicator({
   type = ProgressIndicator.LINE,
   currentIndex,
@@ -18,7 +27,7 @@ export default function ProgressIndicator({
     case ProgressIndicator.NUMBER:
       return (
         <NumberProgressIndicator
-          currentNumber={currentIndex + 1}
+          currentStep={currentIndex + 1}
           numberOfSteps={max + 1}
         />
       );
@@ -31,11 +40,16 @@ ProgressIndicator.LINE = 'line';
 ProgressIndicator.DOT = 'dot';
 ProgressIndicator.NUMBER = 'number';
 
-/*
-This doesn't seem to fit the [ARIA definition of a progressbar](https://www.w3.org/TR/wai-aria-1.1/#progressbar).
-Also, that state is communicated through [aria-current](https://www.w3.org/TR/wai-aria-1.1/#aria-current) on the Slide component,
-so this and the other progress types will be aria-hidden.
-*/
+/**
+ * Display a visual progress bar spanning across the bottom of the deck.
+ * 
+ * NOTE: This doesn't seem to fit the [ARIA definition of a progressbar](https://www.w3.org/TR/wai-aria-1.1/#progressbar).
+ * Also, that state is communicated through [aria-current](https://www.w3.org/TR/wai-aria-1.1/#aria-current) on the Slide component, 
+ * so this and the other progress types will be aria-hidden as they're only visual indicators.
+ * 
+ * @param { object } props
+ * @param { number } props.progress - current progress as percent (0-100)
+ */
 function LineProgressIndicator({ progress }) {
   return (
     <div
@@ -50,6 +64,13 @@ function LineProgressIndicator({ progress }) {
   );
 }
 
+/**
+ * Display a progression of dots to show slide progress.
+ * 
+ * @param { object } props
+ * @param { number } props.currentIndex - current slide index
+ * @param { number } props.numberOfSteps - total number of slides
+ */
 function DotProgressIndicator({ currentIndex, numberOfSteps }) {
   const dots = useMemo(() => Array.from(new Array(numberOfSteps), () => Dot), [
     numberOfSteps,
@@ -77,13 +98,20 @@ function Dot({ active }) {
   );
 }
 
-function NumberProgressIndicator({ currentNumber, numberOfSteps }) {
+/**
+ * Display a numerical indicator of slide progress.
+ * 
+ * @param { object } props
+ * @param { number } props.currentStep - current slide step
+ * @param { number } props.numberOfSteps - total number of slides
+ */
+function NumberProgressIndicator({ currentStep, numberOfSteps }) {
   return (
     <span
       aria-hidden
       className="fixed bottom-0 right-0 p-2 font-mono text-sm text-gray-600"
     >
-      {currentNumber}/{numberOfSteps}
+      {currentStep}/{numberOfSteps}
     </span>
   );
 }

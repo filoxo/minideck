@@ -1,3 +1,4 @@
+// @ts-check
 /*
 Many times, the Markdown `blockquote` ie. `>` is abused when in reality an `aside` element is more appropriate.
 This component should be used in those instances, which is almost always.
@@ -5,7 +6,13 @@ This component should be used in those instances, which is almost always.
 import React from "react";
 import cls from "classnames";
 
-export default function Aside({ children, info, warning }) {
+/**
+ * @param { object } props
+ * @param { boolean } [props.info] - display using info accent color (blue)
+ * @param { boolean } [props.warning] - display using warning accent color (red)
+ * @param { JSX.Element } props.children
+ */
+export default function Aside({ info, warning, children }) {
   return (
     <aside
       className={cls("p-2 mt-2 border-l-4 rounded", {
