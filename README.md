@@ -1,3 +1,7 @@
+> # Use [slidev](https://sli.dev/) instead! 
+> 
+> so much better!
+
 # minideck
 
 A simple MDX-powered deck.
